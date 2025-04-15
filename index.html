@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <!-- Importar la tipografía Fredoka One desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pantalla de inicio -->
+    <div id="inicio" class="screen">
+        <h1>Neuroplay</h1>
+        <img src="img/logo.PNG" alt="Logo" class="logo">
+        <button onclick="goToDatos()">Iniciar</button>
+    </div>
+
+    <!-- Pantalla de datos (nombre y edad) -->
+    <div id="datos" class="screen" style="display: none;">
+        <h1>Ingresa tus datos</h1>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="number" id="edad" placeholder="Edad">
+        <button onclick="goToJuego()">Continuar</button>
+    </div>
+
+    <!-- Pantalla de juego -->
+    <div id="juego" class="screen" style="display: none;">
+        <h1>Juego de Memoria</h1>
+        <img src="img/FondoGato.PNG" alt="gato" class="imagen-gato">
+        <button onclick="goToNiveles()">Comenzar</button>
+    </div>
+
+    <!-- Pantalla de niveles -->
+    <div id="niveles" class="screen" style="display: none;">
+        <h1>Selecciona un nivel</h1>
+        <div class="botones-niveles">
+            <button onclick="iniciarJuegoFacil()">Fácil</button>
+            <button onclick="iniciarJuegoIntermedio()">Intermedio</button>
+            <button onclick="iniciarJuegoAvanzado()">Avanzado</button>
+        </div>
+    </div>
+    <!-- Pantalla de juego fácil -->
+    <div id="memoria-facil" class="screen" style="display: none;">
+        <h1>Juego Fácil</h1>
+        <div id="tablero-facil" class="tablero"></div>
+        <button onclick="goToNiveles()">Volver a niveles</button>
+    </div>
+    <!-- Pantalla de victoria -->
+    <div id="pantalla-victoria" class="screen" style="display: none;">
+        <h1>🎉 ¡Felicidades!</h1>
+        <p>Has completado el nivel fácil.</p>
+        <button onclick="goToNiveles()">Volver a niveles</button>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
