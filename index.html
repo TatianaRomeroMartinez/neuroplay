@@ -96,8 +96,8 @@
         <h1>Selecciona un nivel - Flashcards</h1>
         <div class="botones-niveles">
             <button onclick="iniciarFlashcardsFacil()">Fácil</button>
-            <button onclick="alert('Nivel intermedio en construcción')">Intermedio</button>
-            <button onclick="alert('Nivel avanzado en construcción')">Avanzado</button>
+            <button onclick="iniciarFlashcardsIntermedio()">Intermedio</button>
+            <button onclick="iniciarFlashcardsAvanzado()">Avanzado</button>
             <button onclick="goToSeleccionJuegos()">Volver</button>
         </div>
     </div>
@@ -115,6 +115,35 @@
         <p id="resultado-facil"></p>
         <button onclick="goToNivelesFlashcards()">Volver</button>
     </div>
+
+    <!-- Pantalla de Flashcards - Nivel Intermedio -->
+    <div id="flashcards-intermedio" class="screen" style="display: none;">
+        <h1>Flashcards - Conteo</h1>
+        <div class="card">
+            <img id="imagen-intermedio" src="" alt="imagen" class="imagen-gato">
+            <h2 id="pregunta-intermedio">Pregunta</h2>
+        </div>
+        <button onclick="escucharPreguntaIntermedio()">🔊 Escuchar pregunta</button>
+        <button onclick="decirRespuestaIntermedio()">🎤 Responder</button>
+        <p id="resultado-intermedio"></p>
+        <button onclick="siguienteIntermedio()">Siguiente</button>
+        <button onclick="goToNivelesFlashcards()">Volver</button>
+    </div>
+
+    <!-- Pantalla de Flashcards - Nivel Avanzado -->
+    <div id="flashcards-avanzado" class="screen" style="display: none;">
+        <h1>Flashcards - Avanzado</h1>
+        <div class="card">
+            <img id="imagen-avanzado" src="" alt="imagen" class="imagen-gato">
+            <h2 id="instruccion-avanzado">¿Qué hace o cómo se siente?</h2>
+        </div>
+        <button onclick="decirPalabraAvanzado()">🎤 Decir palabra</button>
+        <p id="resultado-avanzado"></p>
+        <button onclick="siguienteAvanzado()">Siguiente</button>
+        <button onclick="goToNivelesFlashcards()">Volver</button>
+    </div>
+
+
 
 
 

@@ -200,3 +200,114 @@ function decirPalabraFacil() {
     document.getElementById("resultado-facil").textContent = "🎤 Escuchando...";
     reconocimiento.start();
 }
+
+const tarjetasIntermedio = [
+    { pregunta: "¿Cuántos gatos hay?", respuesta: "dos", imagen: "gatos_contar.PNG" },
+    { pregunta: "¿Cuántas manzanas hay?", respuesta: "cuatro", imagen: "manzana_contar.PNG" },
+    { pregunta: "¿Cuántos corazones hay?", respuesta: "ocho", imagen: "corazones_contar.PNG" }
+];
+
+
+let indiceIntermedio = 0;
+
+function iniciarFlashcardsIntermedio() {
+    indiceIntermedio = 0;
+    mostrarFlashcardIntermedio();
+}
+
+function mostrarFlashcardIntermedio() {
+    const card = tarjetasIntermedio[indiceIntermedio];
+    document.getElementById("imagen-intermedio").src = `img/${card.imagen}`;
+    document.getElementById("pregunta-intermedio").textContent = card.pregunta;
+    document.getElementById("resultado-intermedio").textContent = "";
+    mostrarPantalla("flashcards-intermedio");
+}
+
+function siguienteIntermedio() {
+    indiceIntermedio = (indiceIntermedio + 1) % tarjetasIntermedio.length;
+    mostrarFlashcardIntermedio();
+}
+
+function escucharPreguntaIntermedio() {
+    const texto = tarjetasIntermedio[indiceIntermedio].pregunta;
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'es-ES';
+    window.speechSynthesis.speak(utterance);
+}
+
+function decirRespuestaIntermedio() {
+    const reconocimiento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    reconocimiento.lang = 'es-ES';
+    reconocimiento.interimResults = false;
+    reconocimiento.maxAlternatives = 1;
+
+    reconocimiento.onresult = function(event) {
+        const dicho = event.results[0][0].transcript.trim().toLowerCase();
+        const correcto = tarjetasIntermedio[indiceIntermedio].respuesta.trim().toLowerCase();
+
+        if (dicho === correcto) {
+            document.getElementById("resultado-intermedio").textContent = "✅ ¡Correcto!";
+        } else {
+            document.getElementById("resultado-intermedio").textContent = `❌ Dijiste "${dicho}". Intenta otra vez.`;
+        }
+    };
+
+    reconocimiento.onerror = function(event) {
+        document.getElementById("resultado-intermedio").textContent = "❌ Error: " + event.error;
+    };
+
+    document.getElementById("resultado-intermedio").textContent = "🎤 Escuchando...";
+    reconocimiento.start();
+}
+
+const tarjetasAvanzado = [
+    { imagen: "niña_enojada.PNG", palabra: "enojada" },
+    { imagen: "niña_corriendo.PNG", palabra: "corriendo" },
+    { imagen: "niña_llorando.PNG", palabra: "llorando" },
+    { imagen: "niño_cantando.PNG", palabra: "cantando" }
+];
+
+
+let indiceAvanzado = 0;
+
+function iniciarFlashcardsAvanzado() {
+    indiceAvanzado = 0;
+    mostrarFlashcardAvanzado();
+}
+
+function mostrarFlashcardAvanzado() {
+    const card = tarjetasAvanzado[indiceAvanzado];
+    document.getElementById("imagen-avanzado").src = `img/${card.imagen}`;
+    document.getElementById("resultado-avanzado").textContent = "";
+    mostrarPantalla("flashcards-avanzado");
+}
+
+function siguienteAvanzado() {
+    indiceAvanzado = (indiceAvanzado + 1) % tarjetasAvanzado.length;
+    mostrarFlashcardAvanzado();
+}
+
+function decirPalabraAvanzado() {
+    const reconocimiento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    reconocimiento.lang = 'es-ES';
+    reconocimiento.interimResults = false;
+    reconocimiento.maxAlternatives = 1;
+
+    reconocimiento.onresult = function(event) {
+        const dicho = event.results[0][0].transcript.trim().toLowerCase();
+        const correcto = tarjetasAvanzado[indiceAvanzado].palabra.toLowerCase();
+
+        if (dicho === correcto) {
+            document.getElementById("resultado-avanzado").textContent = "✅ ¡Muy bien!";
+        } else {
+            document.getElementById("resultado-avanzado").textContent = `❌ Dijiste "${dicho}", intenta otra vez.`;
+        }
+    };
+
+    reconocimiento.onerror = function(event) {
+        document.getElementById("resultado-avanzado").textContent = "❌ Error: " + event.error;
+    };
+
+    document.getElementById("resultado-avanzado").textContent = "🎤 Escuchando...";
+    reconocimiento.start();
+}
