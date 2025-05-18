@@ -35,12 +35,33 @@ function iniciarJuegoMemoria(nivel, imagenes) {
         const carta = document.createElement("div");
         carta.classList.add("carta");
         carta.dataset.valor = nombre;
-        carta.innerHTML = `<img src="img/dorso.png" alt="tapa">`;
+
+        // Define ruta para dorso y modo daltonismo
+        const modoDaltonismo = document.body.classList.contains('colorblind-mode');
+        const dorso = "img/dorso.png";
+        const dorsoDaltonismo = "img/dorso_dal.png";
+        const rutaDorso = modoDaltonismo ? dorsoDaltonismo : dorso;
+
+        const img = document.createElement("img");
+        img.src = rutaDorso;
+        img.alt = "tapa";
+        img.setAttribute("data-alt-src", dorsoDaltonismo);
+
+        carta.appendChild(img);
 
         carta.addEventListener("click", () => {
             if (bloquear || carta.classList.contains("encontrada") || cartasVolteadas.includes(carta)) return;
 
-            carta.querySelector("img").src = `img/${carta.dataset.valor}`;
+            // Obtener nombre de imagen actual
+            const valor = carta.dataset.valor;
+            const rutaNormal = `img/${valor}`;
+            const rutaDaltonismo = `img/${valor.replace(/\.(png|jpg|jpeg)$/i, '_dal.$1')}`;
+            const rutaActual = modoDaltonismo ? rutaDaltonismo : rutaNormal;
+
+            const imgCarta = carta.querySelector("img");
+            imgCarta.src = rutaActual;
+            imgCarta.setAttribute("data-alt-src", rutaDaltonismo);
+
             cartasVolteadas.push(carta);
 
             if (cartasVolteadas.length === 2) {
@@ -62,8 +83,14 @@ function iniciarJuegoMemoria(nivel, imagenes) {
 
                 } else {
                     setTimeout(() => {
-                        c1.querySelector("img").src = "img/dorso.png";
-                        c2.querySelector("img").src = "img/dorso.png";
+                        const rutaReset = modoDaltonismo ? dorsoDaltonismo : dorso;
+
+                        c1.querySelector("img").src = rutaReset;
+                        c2.querySelector("img").src = rutaReset;
+
+                        c1.querySelector("img").setAttribute("data-alt-src", dorsoDaltonismo);
+                        c2.querySelector("img").setAttribute("data-alt-src", dorsoDaltonismo);
+
                         cartasVolteadas = [];
                         bloquear = false;
                     }, 1000);
@@ -159,10 +186,13 @@ function iniciarFlashcardsFacil() {
 
 function mostrarFlashcardFacil() {
     const card = tarjetasFacil[indiceFacil];
-    document.getElementById("imagen-facil").src = `img/${card.imagen}`;
+    const img = document.getElementById("imagen-facil");
+    img.src = `img/${card.imagen}`;
+    img.setAttribute("data-alt-src", `img/${card.imagen.replace(/\.(png|jpg|jpeg)$/i, '_dal.$1')}`);
     document.getElementById("texto-facil").textContent = card.palabra;
     mostrarPantalla("flashcards-facil");
 }
+
 
 function siguienteFacil() {
     indiceFacil = (indiceFacil + 1) % tarjetasFacil.length;
@@ -217,7 +247,9 @@ function iniciarFlashcardsIntermedio() {
 
 function mostrarFlashcardIntermedio() {
     const card = tarjetasIntermedio[indiceIntermedio];
-    document.getElementById("imagen-intermedio").src = `img/${card.imagen}`;
+    const img = document.getElementById("imagen-intermedio");
+    img.src = `img/${card.imagen}`;
+    img.setAttribute("data-alt-src", `img/${card.imagen.replace(/\.(png|jpg|jpeg)$/i, '_dal.$1')}`);
     document.getElementById("pregunta-intermedio").textContent = card.pregunta;
     document.getElementById("resultado-intermedio").textContent = "";
     mostrarPantalla("flashcards-intermedio");
@@ -277,11 +309,12 @@ function iniciarFlashcardsAvanzado() {
 
 function mostrarFlashcardAvanzado() {
     const card = tarjetasAvanzado[indiceAvanzado];
-    document.getElementById("imagen-avanzado").src = `img/${card.imagen}`;
+    const img = document.getElementById("imagen-avanzado");
+    img.src = `img/${card.imagen}`;
+    img.setAttribute("data-alt-src", `img/${card.imagen.replace(/\.(png|jpg|jpeg)$/i, '_dal.$1')}`);
     document.getElementById("resultado-avanzado").textContent = "";
     mostrarPantalla("flashcards-avanzado");
 }
-
 function siguienteAvanzado() {
     indiceAvanzado = (indiceAvanzado + 1) % tarjetasAvanzado.length;
     mostrarFlashcardAvanzado();
@@ -310,4 +343,28 @@ function decirPalabraAvanzado() {
 
     document.getElementById("resultado-avanzado").textContent = "🎤 Escuchando...";
     reconocimiento.start();
+}
+/*Daltonismo*/
+
+function toggleClass(className) {
+  document.body.classList.toggle(className);
+
+  // Activar o desactivar imágenes para daltonismo
+  if (className === 'colorblind-mode') {
+    const isActive = document.body.classList.contains('colorblind-mode');
+    document.querySelectorAll('img[data-alt-src]').forEach(img => {
+      const originalSrc = img.getAttribute('src');
+      const altSrc = img.getAttribute('data-alt-src');
+
+      if (isActive) {
+        img.setAttribute('data-original-src', originalSrc); // Guarda original
+        img.setAttribute('src', altSrc); // Cambia a imagen adaptada
+      } else {
+        const original = img.getAttribute('data-original-src');
+        if (original) {
+          img.setAttribute('src', original);
+        }
+      }
+    });
+  }
 }

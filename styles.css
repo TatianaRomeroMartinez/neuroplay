@@ -195,3 +195,96 @@ button {
     justify-content: center;
     margin-top: 20px;
 }
+
+
+/*Accesibilidad*/
+
+/* Posicionamiento del botón */
+#accessibility-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#accessibility-toggle img {
+  width: 50px;
+  height: auto;
+}
+
+/* Menú de accesibilidad */
+#accessibility-menu {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: white;
+  border: 2px solid #007b8a;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  z-index: 999;
+}
+
+#accessibility-menu button {
+  display: block;
+  margin: 5px 0;
+  width: 100%;
+  padding: 8px;
+  background-color: #007b8a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#accessibility-menu button:hover {
+  background-color: #005f6b;
+}
+
+/* Accesibilidad - clases especiales */
+body.large-text {
+  font-size: 1.5em;
+}
+
+body.high-contrast {
+  background-color: black;
+  color: yellow;
+}
+
+body.dyslexia-font {
+  font-family: 'OpenDyslexic', Arial, sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  background-color: #f0f4ff; /* color suave opcional */
+}
+
+/* Modo para daltonismo */
+body.colorblind-mode {
+  --color-principal: #0072B2; /* azul fuerte */
+  --color-secundario: #E69F00; /* naranja */
+  --color-fondo: #f4f4f4;
+  --color-texto: #000000;
+}
+
+body.colorblind-mode {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* Ejemplo aplicado a botones, títulos, etc. */
+.colorblind-mode button {
+  background-color: var(--color-principal) !important;
+  color: white !important;
+  border: none;
+}
+
+.colorblind-mode h1, 
+.colorblind-mode h2, 
+.colorblind-mode h3 {
+  color: var(--color-principal);
+}
