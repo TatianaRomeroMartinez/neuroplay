@@ -104,17 +104,17 @@ function iniciarJuegoMemoria(nivel, imagenes) {
 
 //funcion juego facil 
 function iniciarJuegoFacil() {
-    const imagenesFacil = ['banano.jpg', 'manzana.jpg', 'sandia.png'];
+    const imagenesFacil = ['banano.png', 'manzana.png', 'sandia.png'];
     iniciarJuegoMemoria('facil', imagenesFacil);
 }
 //funcion juego intermedio 
 function iniciarJuegoIntermedio() {
-    const imagenesIntermedio = ['banano.jpg', 'manzana.jpg', 'sandia.png', 'naranja.jpg', 'pera.jpg', 'uva.png'];
+    const imagenesIntermedio = ['banano.png', 'manzana.png', 'sandia.png', 'naranja.png', 'pera.png', 'uva.png'];
     iniciarJuegoMemoria('intermedio', imagenesIntermedio);
 }
 //funcion juego intermedio 
 function iniciarJuegoAvanzado() {
-    const imagenesAvanzado = ['banano.jpg', 'manzana.jpg', 'sandia.png', 'naranja.jpg', 'pera.jpg', 'uva.png', 'kiwi.png', 'mango.png', 'piña.png', 'papaya.png'];
+    const imagenesAvanzado = ['banano.png', 'manzana.png', 'sandia.png', 'naranja.png', 'pera.png', 'uva.png', 'kiwi.png', 'mango.png', 'piña.png', 'papaya.png'];
     iniciarJuegoMemoria('avanzado', imagenesAvanzado);
 }
 
@@ -169,12 +169,12 @@ function goToNivelesFlashcards() {
 }
 // Flashcards - Nivel Fácil
 const tarjetasFacil = [
-    { palabra: "Ballena", imagen: "ballena.PNG" },
-    { palabra: "Gato", imagen: "cat.jpg" },
-    { palabra: "Perro", imagen: "dog.jpg" },
-    { palabra: "León", imagen: "leon.PNG" },
-    { palabra: "Serpiente", imagen: "serpiente.PNG" },
-    { palabra: "Mono", imagen: "mono.PNG" }
+    { palabra: "Ballena", imagen: "ballena.png" },
+    { palabra: "Gato", imagen: "cat.png" },
+    { palabra: "Perro", imagen: "dog.png" },
+    { palabra: "León", imagen: "leon.png" },
+    { palabra: "Serpiente", imagen: "serpiente.png" },
+    { palabra: "Mono", imagen: "mono.png" }
 ];
 
 let indiceFacil = 0;
@@ -232,9 +232,9 @@ function decirPalabraFacil() {
 }
 
 const tarjetasIntermedio = [
-    { pregunta: "¿Cuántos gatos hay?", respuesta: "dos", imagen: "gatos_contar.PNG" },
-    { pregunta: "¿Cuántas manzanas hay?", respuesta: "cuatro", imagen: "manzana_contar.PNG" },
-    { pregunta: "¿Cuántos corazones hay?", respuesta: "ocho", imagen: "corazones_contar.PNG" }
+    { pregunta: "¿Cuántos gatos hay?", respuesta: "dos", imagen: "gatos_contar.png" },
+    { pregunta: "¿Cuántas manzanas hay?", respuesta: "cuatro", imagen: "manzana_contar.png" },
+    { pregunta: "¿Cuántos corazones hay?", respuesta: "ocho", imagen: "corazones_contar.png" }
 ];
 
 
@@ -293,10 +293,10 @@ function decirRespuestaIntermedio() {
 }
 
 const tarjetasAvanzado = [
-    { imagen: "niña_enojada.PNG", palabra: "enojada" },
-    { imagen: "niña_corriendo.PNG", palabra: "corriendo" },
-    { imagen: "niña_llorando.PNG", palabra: "llorando" },
-    { imagen: "niño_cantando.PNG", palabra: "cantando" }
+    { imagen: "niña_enojada.png", palabra: "enojada" },
+    { imagen: "niña_corriendo.png", palabra: "corriendo" },
+    { imagen: "niña_llorando.png", palabra: "llorando" },
+    { imagen: "niño_cantando.png", palabra: "cantando" }
 ];
 
 
